@@ -3,6 +3,7 @@ const router = express.Router()
 const Author = require('../models/author')
 
 
+
 // All authors route
 router.get('/', async (req, res) => {
     console.log("getting request")
@@ -30,7 +31,7 @@ router.get('/new', (req, res) => {
 
 // Create Author route
 router.post('/', async (req, res) => {
-    //console.log("new author: " + req.body.name)
+    console.log("new author: " + req.body.name)
     const author = new Author({
         name: req.body.name
     })

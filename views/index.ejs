@@ -1,7 +1,11 @@
-<h2>Search Authors</h2>
-<form action="/authors" method="GET">
-    <label>Name</label>
-    <input type="text" name="name">
-    <button type ="submit">Search</button>
-</form>
-<br>
+<h2 class="page-header">Recently Added</h2>
+
+<h3>Books:</h3>
+<% books.forEach(book => { %>
+    <div><%= book.title %></div>
+    <div><%= book.publishedBefore %></div>
+ <% }) %>
+<div>
+   
+</div>
+
