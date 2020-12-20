@@ -1,4 +1,4 @@
-<h2>Index Search Authors</h2>
+<h2>Search Authors</h2>
 <form action="/authors" method="GET">
     <label>Name</label>
     <input type="text" name="name">
@@ -6,4 +6,16 @@
 </form>
 <br>
 
+<% authors.forEach(author => { %>
+    <div class="author-row">
+      <div class="author-name"><%= author.name %></div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
+        <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
+        <%- include('../partials/deleteForm',
+        { url: `/authors/${author.id}` }) %>
+        
+      </div>
+    </div>
+  <% }) %>
 
