@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 
 // New Author Route
 router.get('/new', (req, res) => {
-    console.log("adding author...")
+    //console.log("adding author...")
   res.render('authors/new', { author: new Author() })
 })
 
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id)
+    const author = await Author.findById(req.params.id).sort({ orderIndex: -1 })
     const books = await Book.find({ author: author.id }).limit(6).exec()
     res.render('authors/show', {
       author: author,
@@ -58,7 +58,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/edit', async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id)
+    const author = await Author.findById(req.params.id).sort({ orderIndex: -1 })
     res.render('authors/edit', { author: author })
   } catch {
     res.redirect('/authors')
@@ -66,8 +66,7 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-  console.log("Put request");
-  let author
+   let author
   try {
     author = await Author.findById(req.params.id)
     author.name = req.body.name

@@ -8,18 +8,30 @@ const bookSchema = new mongoose.Schema({
     description: { 
         type: String
     },
+    publisher: { 
+        type: String
+    },
+    genre: { 
+        type: String
+    },
+   
     publishDate: { 
-        type: String, 
+        type: Date, 
         required: true
     },
-    readStartDate: { 
+    originalTitle: { 
         type: String
+    },
+    readStartDate: {
+        type: Date,
+        required: true
     },
     readEndDate: { 
-        type: String
+        type: Date,
+        required: true
     },
     createdAt: { 
-        type: String, 
+        type: Date,
         required: true, 
         default: Date.now
     },
@@ -27,8 +39,12 @@ const bookSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
+    rating: { 
+        type: Number, 
+        required: true
+    },
     publishDate: { 
-        type: String, 
+        type: Date, 
         required: true, 
         default: Date.now
     },

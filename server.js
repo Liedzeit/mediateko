@@ -24,12 +24,14 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 
 
 const mongoose = require('mongoose')
+const { localsName } = require('ejs')
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true, useUnifiedTopology: true})
 
 const db = mongoose.connection
 db.on('error', error => console.log(error))
 db.once('open', () => console.log('Connected to Mongoose'))
+
 
 app.use('/', indexRouter)
 app.use('/authors', authorRouter)

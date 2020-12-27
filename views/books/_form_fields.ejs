@@ -1,45 +1,136 @@
 
 
+<!--<p class="stars">
+  <span>
+    <a class="star-1" href="#">1</a>
+    <a class="star-2" href="#">2</a>
+    <a class="star-3" href="#">3</a>
+    <a class="star-4" href="#">4</a>
+    <a class="star-5" href="#">5</a>
+  </span>
+</p>-->
+
+
+<fieldset class="rate">
+  <% console.log ("ejs rating " + book.rating) %>
+  <input type="radio" class="starrate" id="rating10" <%- book.rating=='10' ? 'checked' : '' %> name="rating" value="10" /><label for="rating10" title="5 stars"></label>
+  <input type="radio" class="starrate" id="rating9"  <%- book.rating=='9' ? 'checked' : '' %>  name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
+    <input type="radio" class="starrate" id="rating8"  <%- book.rating=='8' ? 'checked' : '' %>  name="rating" value="8" /><label for="rating8" title="4 stars"></label>
+    <input type="radio" class="starrate" id="rating7"  <%- book.rating=='7' ? 'checked' : '' %> name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
+    <input type="radio" class="starrate" id="rating6"   <%- book.rating=='6' ? 'checked' : '' %> name="rating" value="6" /><label for="rating6" title="3 stars"></label>
+    <input type="radio" class="starrate" id="rating5"  <%- book.rating=='5' ? 'checked' : '' %> name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
+    <input type="radio" class="starrate" id="rating4"  <%- book.rating=='4' ? 'checked' : '' %> name="rating" value="4" /><label for="rating4" title="2 stars"></label>
+    <input type="radio" class="starrate" id="rating3"   <%- book.rating=='3' ? 'checked' : '' %> name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
+    <input type="radio" class="starrate" id="rating2"   <%- book.rating=='2' ? 'checked' : '' %>  name="rating" value="2" /><label for="rating2" title="1 star"></label>
+    <input type="radio" class="starrate" id="rating1"  <%- book.rating=='1' ? 'checked' : '' %> name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
+
+</fieldset>
+
+
+
+
 <div class="form-row">
-    <div class="form-item">
-      <label>Title neue</label>
-      <input type="text" name="title" value="<%= book.title %>">
-    </div>
-    <div class="form-item">
-      <label>Author</label>
-      <select name="author">
-        <% authors.forEach(author => { %>
-          <% if (author.id === book.author) { %>
-            <option selected label="<%= author.name %>" value="<%= author.id %>">
-          <% } else { %>
-            <option label="<%= author.name %>" value="<%= author.id %>">
-          <% } %>
-        <% }) %>
-      </select>
-    </div>
+  <div class="form-item">
+    <label>Title</label>
+    <input type="text" name="title" value="<%= book.title %>">
   </div>
+  <div class="form-item">
+    <label>Author</label>
+    <select name="author">
+      <% authors.forEach(author => { %>
+       
+        <% if (author.id == book.author) { %>
+         
+          <option selected label="<%= author.name %>" value="<%= author.id %>">
+        <% } else { %>
+          <option label="<%= author.name %>" value="<%= author.id %>">
+        <% } %>
+      <% }) %>
+    </select>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-item">
+    <label>Genre</label>
+    <select name="genre">
+      
+      <% genres.forEach(genre => { %>
+        <% if (genre == book.genre) { %>
+          <option selected label="<%= genre %>" value="<%= genre %>">
+            <% } else { %>
+              <option label="<%= genre %>" value="<%= genre %>">
+                <% } %>
+      <% }) %>
+    </select>
+  </div>
+
+
+   <div class="form-item">
+    <label>Publisher</label>
+    <input type="text" name="publisher"
+    value="<%= book.publisher %>">     
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-item">
+    <label>Published</label>
+    <input type="date" name="publishDate"
+    value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
+         
+  </div>
+  <div class="form-item">
+    <label>Pages</label>
+    <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-item">
+    <label>Started Reading...</label>
+    <input type="date" name="readStartDate"
   
-  <div class="form-row">
-    <div class="form-item">
-      <label>Publish Date</label>
-      <input type="date" name="publishDate"
-      value="<%= book.publishDate == null ? '' : book.publishDate %>">
-    </div>
-    <div class="form-item">
-      <label>Page Count</label>
-      <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
-    </div>
+    value="<%= book.readStartDate == null ? '' : book.readStartDate.toISOString().split('T')[0] %>">
+         
+  </div>
+  <div class="form-item">
+    <label>Ended Reading</label>
+    <input type="date" name="readEndDate"
+    value="<%= book.readEndDate == null ? '' : book.readEndDate.toISOString().split('T')[0] %>">
+  </div>
+</div>
+
+
+<div class="form-row">
+  <div class="form-item">
+    <label>Original Title</label>
+    <input type="text" name="genre"
+    value="<%= book.originalTitle %>">
   </div>
 
-  <div class="form-row">
-    <div class="form-item form-item-no-grow">
-      <label>Cover</label>
-      <input type="file" name="cover" class="book-cover filepond">
-    </div>
-    <div class="form-item">
-      <label>Description</label>
-      <textarea name="description"><%= book.description %></textarea>
-    </div>
+  <div class="form-item">
+    <label>Rating</label>
+    <input type="text" name="test"
+    value="<%= book.rating %>">
+   
   </div>
 
+
+
+  
+ 
+</div>
+
+
+<div class="form-row">
+  <div class="form-item form-item-no-grow">
+    <label>Cover</label>
+    <input type="file" name="cover" class="book-cover filepond">
+  </div>
+  <div class="form-item">
+    <label>Review</label>
+    <textarea name="description"><%= book.description %></textarea>
+  </div>
+</div>
   

@@ -4,12 +4,18 @@ const Book = require('../models/book')
 const Author = require('../models/author')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
+const genres=["Fiction","Classics","Science","Science Fiction","Mystery","Philosophy","Miscellaneous","Biography","Auto Biography","Thriller","Film"]
+   
+let curerrmsg = ""
+
 
 
 
 // All Books route
 router.get('/', async (req, res) => {
     let query = Book.find()
+    //console.log("Find genre " + JSON.stringify(req))
+   
     if (req.query.title != null && req.query.title != '') {
       query = query.regex('title', new RegExp(req.query.title, 'i'))
     }
@@ -19,13 +25,20 @@ router.get('/', async (req, res) => {
     if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
       query = query.gte('publishDate', req.query.publishedAfter)
     }
+    if (req.query.genre != null && req.query.genre != 'All') {
+      query = query.where('genre', req.query.genre)
+    }
+   
     try {
       const books = await query.exec()
+      //console.log("received results from db " + books.length)
       res.render('books/index', {
         books: books,
+        genres: genres,
         searchOptions: req.query
       })
-    } catch {
+    } catch (e) {
+      console.log(e.message)
       res.redirect('/')
     }
   })
@@ -53,23 +66,30 @@ router.get('/:id/edit', async (req, res) => {
   try {
     const book = await Book.findById(req.params.id)
     renderEditPage(res, book)
-  } catch {
+  } catch (e) {
+    console.log("Edit Error: " + e-message)
     res.redirect('/')
   }
 })
 
 // Create Book route -
 router.post('/', async (req, res) => {
-console.log("Title: " + req.body.title)
-console.log("req: " + req)
+
+//console.log("startReadDate: " + req.body.startReadDate)
 const book = new Book({
     title: req.body.title,
     author: req.body.author,
     publishDate: new Date(req.body.publishDate),
+    readStartDate: new Date(req.body.readStartDate),
+    readEndDate: new Date(req.body.readEndDate),
     pageCount: req.body.pageCount,
-    description: req.body.description
+    description: req.body.description,
+    publisher: req.body.publisher,
+    genre: req.body.genre[0],
+    rating: req.body.rating,
+    originalTitle: req.body.originalTitle
 })
-console.log("book " + book)
+//console.log("book " + book)
 saveCover(book, req.body.cover)
 
 try {
@@ -78,7 +98,8 @@ try {
     res.redirect(`books/${newBook.id}`)
     res.redirect(`books`)
 }
-catch {
+catch (er) {
+  curerrmsg = er.message
     renderNewPage(res, book, true)
 } 
 })
@@ -91,14 +112,23 @@ router.put('/:id', async (req, res) => {
     book.title = req.body.title
     book.author = req.body.author //this is actually the authorID
     book.publishDate = new Date(req.body.publishDate)
+    book.readStartDate = new Date(req.body.readStartDate)
+    book.readEndDate = new Date(req.body.readEndDate)
     book.pageCount = req.body.pageCount
     book.description = req.body.description
+    book.genre = req.body.genre[0]
+    book.rating = req.body.rating
+    book.publisher = req.body.publisher
+    book.originalTitle = req.body.originalTitle
     if (req.body.cover != null && req.body.cover !== '') {
       saveCover(book, req.body.cover)
     }
-    await book.save()
+     await book.save()
     res.redirect(`/books/${book.id}`)
-  } catch {
+  } catch (er){
+    curerrmsg = "update error: "  + er.message
+
+    console.log("update error: " + er.message)
     if (book != null) {
       renderEditPage(res, book, true)
     } else {
@@ -141,24 +171,29 @@ async function renderFormPage(res, book, form, hasError = false) {
     const authors = await Author.find({})
     const params = {
       authors: authors,
-      book: book
+      book: book,
+      genres: genres
     }
     if (hasError) {
       if (form === 'edit') {
-        params.errorMessage = 'Error Updating Book'
+        params.errorMessage = 'Error Updating Book '+curerrmsg
       } else {
-        params.errorMessage = 'Error Creating Book'
+        params.errorMessage = 'Error Creating Book '+curerrmsg
       }
+     
     }
+
     res.render(`books/${form}`, params)
-  } catch {
+  } catch (e) {
+    console.log(e.message)
     res.redirect('/books')
   }
+  
 }
 
 
 function saveCover(book, coverEncoded) {
-    console.log("saving cover")
+    //console.log("saving cover")
     if (coverEncoded == null) return
     const cover = JSON.parse(coverEncoded)
     if (cover != null && imageMimeTypes.includes(cover.type)) {

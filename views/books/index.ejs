@@ -9,13 +9,20 @@
   </div>
   <div class="form-row">
     <div class="form-item">
-      <label>Published After</label>
+      <label>Published</label>
       <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
     </div>
     <div class="form-item">
-      <label>Published Before</label>
-      <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
-    </div>
+      <label>Genre</label>
+      <select name="genre">
+        <option label="All" value="All"></option>
+        <% genres.forEach(genre => { %>
+          <option label="<%= genre %>" value="<%= genre %>">
+                 
+        <% }) %>
+       
+      </select>
+     </div>
   </div>
   <div class="form-row form-row-end">
     <button class="btn btn-primary" type="submit">Search</button>
@@ -23,3 +30,4 @@
 </form>
 <br>
 <%- include('../partials/bookGrid', { books: books, large: true }) %>
+
