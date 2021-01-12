@@ -2,11 +2,24 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const Author = require('../models/author')
+const fetch = require('node-fetch')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
-const genres=["Fiction","Classics","Science","Science Fiction","Mystery","Philosophy","Miscellaneous","Biography","Auto Biography","Thriller","Film"]
+
+const genres=["Fiction","Classics","Science","Science Fiction","Mystery","Philosophy","Miscellaneous","Biography","Auto Biography","Thriller","Film","Politics","Comics"]
    
+
+let grbook
 let curerrmsg = ""
+
+const getGenre = (s) => {
+  if (typeof s !== 'string') return ''
+   s = s.split(",")[0]
+  if (s=="science-fiction") return "Science Fiction"
+  if (s=="auto-biography") return "Auto Biography"
+  
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 
 
@@ -48,6 +61,9 @@ router.get('/new', async (req, res) => {
     renderNewPage(res, new Book())
 })
 
+
+
+
 // Show Book Route
 router.get('/:id', async (req, res) => {
   try {
@@ -72,6 +88,108 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
+
+
+// needs bodyparser.json to work
+router.post('/import', async (req, res) => {
+  let data = req.body
+  let counter = 0;
+  let query = Author.find()
+  for (var i = 0; i<data.length;i++) {
+   grbook =  data[i]
+    if (grbook["Date Read"] == "") continue
+
+    let aname = grbook.Author
+   
+    console.log(aname) // does author already exist?
+    query = query.where('name', aname)
+    try {
+      const authors = await query.exec()
+      let authorId
+      console.log("authors: " + JSON.stringify(authors))
+      if (authors.length>0){
+        authorId = authors[0].id
+        console.log (`existing Author: ${aname} ${authorId}`)
+        let title = grbook.Title
+        console.log("title: " + title)
+        saveGoodReadsbook(authorId,grbook)
+        }
+        else {
+          counter ++;
+          const author = new Author({
+          name: aname
+          })
+        try{
+        const newAuthor = await author.save()
+        authorId = newAuthor.id
+        console.log (`new Author: ${aname} ${newAuthor.id}`)
+        saveGoodReadsbook(authorId,grbook)
+        }
+        catch (e){
+            console.log('Error creating Author '+e.message) 
+          }
+        }
+      }
+      catch (e) {
+      console.log(e.message)
+    }
+   
+  }
+  res.send({"added":counter})
+})
+
+
+
+async function saveGoodReadsbook(authorId,grbook){
+  const isbn = grbook.ISBN.substring(2)
+  const url = `http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`
+  console.log(isbn)
+  
+  console.log(url)
+  let blob = getCover(url)
+  //console.log("received blob")
+  const book = new Book({
+    title: grbook.Title,
+    author: authorId,
+    publishDate: grbook["Original Publication Year"],
+    
+    readEndDate: new Date(grbook["Date Read"]),
+    pageCount: grbook["Number of Pages"],
+    description: grbook["My Review"],
+    publisher: grbook.Publisher,
+    genre: getGenre(grbook.Bookshelves),
+    isbn: isbn,
+    goodreadsid: grbook["Book Id"],
+    
+    rating: grbook["My Rating"]
+    
+  })
+  /*if (blob != null && blob !== '') {
+    console.log("size: " + blob.size)
+    saveCover(book, blob)
+  }*/
+  try {
+    const newBook = await book.save()
+    console.log("NEW Id: " + newBook.id+ " "+ grbook.Title)
+}
+catch (er) {
+  console.log("error: " + er.message)
+  curerrmsg = er.message
+    
+} 
+}
+
+async function getCover(url){
+  console.log("getting cover")
+  try{
+    let file = await fetch(url)
+    .then(r => r.blob())
+    .then(blobFile => new File([blobFile], "fileNameGoesHere", { type: "image/png" }))
+  }
+  catch(err) {console.log("ERROR: " + err.message)}
+}
+
+
 // Create Book route -
 router.post('/', async (req, res) => {
 
@@ -85,6 +203,8 @@ const book = new Book({
     pageCount: req.body.pageCount,
     description: req.body.description,
     publisher: req.body.publisher,
+    isbn: req.body.isbn,
+    goodreadsid: req.body.goodreadsid,
     genre: req.body.genre[0],
     rating: req.body.rating,
     originalTitle: req.body.originalTitle
@@ -111,11 +231,13 @@ router.put('/:id', async (req, res) => {
     book = await Book.findById(req.params.id)
     book.title = req.body.title
     book.author = req.body.author //this is actually the authorID
-    book.publishDate = new Date(req.body.publishDate)
+    book.publishDate = req.body.publishDate
     book.readStartDate = new Date(req.body.readStartDate)
     book.readEndDate = new Date(req.body.readEndDate)
     book.pageCount = req.body.pageCount
     book.description = req.body.description
+    book.isbn =  req.body.isbn
+    book.goodreadsid = req.body.goodreadsid
     book.genre = req.body.genre[0]
     book.rating = req.body.rating
     book.publisher = req.body.publisher
@@ -158,6 +280,8 @@ router.delete('/:id', async (req, res) => {
 
 
 
+
+
 async function renderNewPage(res, book, hasError = false) {
   renderFormPage(res, book, 'new', hasError)
 }
@@ -193,14 +317,20 @@ async function renderFormPage(res, book, form, hasError = false) {
 
 
 function saveCover(book, coverEncoded) {
-    //console.log("saving cover")
+    console.log("saving cover")
     if (coverEncoded == null) return
+    console.log("coverEncoded: " +coverEncoded)
     const cover = JSON.parse(coverEncoded)
+    console.log("saving")
     if (cover != null && imageMimeTypes.includes(cover.type)) {
       book.coverImage = new Buffer.from(cover.data, 'base64')
       book.coverImageType = cover.type
     }
   }
+
+
+
+
 
 
 module.exports = router

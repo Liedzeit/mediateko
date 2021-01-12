@@ -39,3 +39,7 @@ body {
 .error-message {
   color: hsl(var(--color-danger-hue), 100%, 50%);
 }
+
+.invisible {
+  display: none;
+}

@@ -76,15 +76,32 @@
 <div class="form-row">
   <div class="form-item">
     <label>Published</label>
-    <input type="date" name="publishDate"
-    value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
-         
+    <input type="text" name="publishDate"
+    value="<%= book.publishDate %>">
   </div>
   <div class="form-item">
     <label>Pages</label>
     <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
   </div>
 </div>
+
+<div class="form-row">
+  <div class="form-item">
+    <label>ISBN</label>
+    <input id="isbn" type="text" name="isbn"
+    value="<%= book.isbn %>">
+  </div>
+  <div class="form-item">
+    <label>Original Title</label>
+    <input type="text" name="genre"
+    value="<%= book.originalTitle %>">
+  </div>
+  <!--<div class="form-item">
+    <label>GoodReadsID</label>
+    <input type="number" name="goodreadsid" value="<%= book.goodreadsid %>">
+  </div>-->
+</div>
+
 
 <div class="form-row">
   <div class="form-item">
@@ -103,13 +120,9 @@
 
 
 <div class="form-row">
-  <div class="form-item">
-    <label>Original Title</label>
-    <input type="text" name="genre"
-    value="<%= book.originalTitle %>">
-  </div>
+ 
 
-  <div class="form-item">
+  <div class="form-item invisible">
     <label>Rating</label>
     <input type="text" name="test"
     value="<%= book.rating %>">

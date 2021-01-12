@@ -14,17 +14,12 @@ const bookSchema = new mongoose.Schema({
     genre: { 
         type: String
     },
-   
-    publishDate: { 
-        type: Date, 
-        required: true
-    },
     originalTitle: { 
         type: String
     },
     readStartDate: {
         type: Date,
-        required: true
+        required: false
     },
     readEndDate: { 
         type: Date,
@@ -39,22 +34,29 @@ const bookSchema = new mongoose.Schema({
         type: Number, 
         required: true
     },
+    isbn: { 
+        type: String, 
+        required: false
+    },
+    goodreadsid: { 
+        type: Number, 
+        required: false
+    },
     rating: { 
         type: Number, 
         required: true
     },
     publishDate: { 
-        type: Date, 
-        required: true, 
-        default: Date.now
+        type: String, 
+        required: false
     },
     coverImage: { 
          type: Buffer, 
-         required: true
+         required: false
     },
     coverImageType: { 
         type: String,
-        required: true
+        required: false
     },
     author: { 
         type: mongoose.Schema.Types.ObjectId, 

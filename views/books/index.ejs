@@ -8,19 +8,14 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-item">
-      <label>Published</label>
-      <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
-    </div>
+   
     <div class="form-item">
       <label>Genre</label>
       <select name="genre">
         <option label="All" value="All"></option>
         <% genres.forEach(genre => { %>
           <option label="<%= genre %>" value="<%= genre %>">
-                 
         <% }) %>
-       
       </select>
      </div>
   </div>
