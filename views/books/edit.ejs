@@ -1,4 +1,4 @@
-<h2 class="page-header">Edit Book</h2>
+<h2 class="page-header">Buch bearbeiten</h2>
 <form action="/books/<%= book.id %>?_method=PUT" method="POST">
   <%- include('_form_fields') %>
   <div class="form-row form-row-end btn-row">
@@ -7,7 +7,7 @@
    
   </div>
 </form>
-<button id="getImage" class="btn btn-primary">getImage</button>
+<button id="getImage" class="invisible btn btn-primary">getImage</button>
 <div id="myImg">
   <img class="thumbnail"></img>
 </div>

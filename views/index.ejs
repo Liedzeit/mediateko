@@ -1,8 +1,13 @@
+<div>
+  <!--<label for="file-input" class="btn btn-primary">Buchimport...</label>
+  <input type="file" style="visibility:hidden;" id="file-input"/>-->
+  <input type="file" id="file-input"/>
+</div>
+
 <h2 class="page-header">Recently Added</h2>
 
 
-<input type="file" id="file-input" />
-<h3>Contents of the file:</h3>
+
 <pre id="file-content"></pre>
 
 <%- include('partials/bookGrid', { books: books, large: true }) %>

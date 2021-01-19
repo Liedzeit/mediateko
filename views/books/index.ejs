@@ -8,7 +8,6 @@
     </div>
   </div>
   <div class="form-row">
-   
     <div class="form-item">
       <label>Genre</label>
       <select name="genre">
@@ -18,8 +17,17 @@
         <% }) %>
       </select>
      </div>
+  
+    <div class="form-item">
+      <label>Publisher</label>
+      <input type="text" name="publisher" value="<%= searchOptions.publisher %>">
+    </div>
   </div>
+
+    
+
   <div class="form-row form-row-end">
+
     <button class="btn btn-primary" type="submit">Search</button>
   </div>
 </form>
