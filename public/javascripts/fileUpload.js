@@ -7,7 +7,7 @@ if (rootStyles.getPropertyValue('--book-cover-width-large') != null && rootStyle
 }
 
 
-document.getElementById('getImage').addEventListener('click', fetchImageFromGoogle)
+//document.getElementById('getImage').addEventListener('click', fetchImageFromGoogle)
 
 function ready() {
   const coverWidth = parseFloat(rootStyles.getPropertyValue('--book-cover-width-large'))

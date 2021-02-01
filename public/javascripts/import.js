@@ -1,7 +1,8 @@
+/*
 document.querySelector('#file-input').addEventListener('change', event => {
   console.log("clicked")
   handleBookUpload(event)
-})
+})*/
 
 function displayContents(contents) {
     var element = document.getElementById('file-content');

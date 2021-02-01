@@ -335,6 +335,7 @@ async function renderEditPage(res, book, hasError = false) {
 async function renderFormPage(res, book, form, hasError = false) {
   try {
     let bookauthor
+    console.log("author id: " + book.author)
     const authors = await Author.find({})
     if (form=='edit'){
       bookauthor = await Author.findById(book.author)

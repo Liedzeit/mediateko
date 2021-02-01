@@ -1,16 +1,3 @@
-
-
-<!--<p class="stars">
-  <span>
-    <a class="star-1" href="#">1</a>
-    <a class="star-2" href="#">2</a>
-    <a class="star-3" href="#">3</a>
-    <a class="star-4" href="#">4</a>
-    <a class="star-5" href="#">5</a>
-  </span>
-</p>-->
-
-
 <fieldset class="rate">
   <input type="radio" class="starrate" id="rating10" <%- book.rating=='10' ? 'checked' : '' %> name="rating" value="10" /><label for="rating10" title="5 stars"></label>
   <input type="radio" class="starrate" id="rating9"  <%- book.rating=='9' ? 'checked' : '' %>  name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
@@ -27,7 +14,7 @@
 
 
 
-<input type="text" class="invisible" id="authorId" name="authorId" value="<%= bookauthor.id %>">
+<input type="text" class = "invisible" id="authorId" name="authorId" value="<%= bookauthor.id %>">
 
 <div class="form-row">
   <div class="form-item">
