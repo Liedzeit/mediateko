@@ -27,6 +27,7 @@ const getGenre = (s) => {
 
 // All Books route
 router.get('/', async (req, res) => {
+  console.log("getting books")
     let query = Book.find()
     //console.log("Find genre " + JSON.stringify(req))
    
@@ -225,7 +226,6 @@ function fetchImageFromGoogle(){
    .then(json => displayImage(json))
    .catch(err => console.error(err))
 }
-
 
 // Create Book route -
 router.post('/', async (req, res) => {

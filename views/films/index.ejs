@@ -1,0 +1,149 @@
+<div id="film-header" class="film-header">
+  Films
+  <div class="film-buttons">
+    <div onclick="toggleFilmSearch()" class="film-icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div class="film-icon">
+
+      <a  href="/films/new"><i class="fa-solid fa-plus"></i></a>
+
+    </div>
+    <div onclick="toggleFilmSort()" class="film-icon">
+      <i class="fa-solid fa-sort"></i>
+  </div>
+   
+
+  </div>
+</div>
+ 
+<div id="searchFilms" class="hidden">
+  <h2  class="page-header">Search Films</h2>
+<form action="/films/search" method="GET">
+  <div class="form-row">
+    <div class="form-item">
+      <label>Title</label>
+      <input type="text" name="Title" value="<%= searchOptions.Title %>">
+    </div>
+    <div class="form-item">
+      <label>Director</label>
+      <input type="text" name="Director" value="<%= searchOptions.Director %>">
+    </div>
+  </div>
+  <div class="form-row">
+   
+  
+    <div class="form-item">
+      
+
+      <label>Genre</label>
+      <select name="genre">
+        
+        <% genres.forEach(genre => { %>
+         
+                <option label="<%= genre %>" value="<%= genre %>">
+                
+        <% }) %>
+      </select>
+
+    </div>
+    <div class="form-item">
+      <label>Actors</label>
+      <input type="text" name="Actors" value="<%= searchOptions.Actors %>">
+    </div>
+  </div>
+  <div class="form-row">
+
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>
+</div>
+
+
+<div id="sortFilms" class="hidden">
+  
+  <form action="/films" method="GET">
+    
+    <div class="form-row">
+    <div class="form-item">
+      <label>Sort</label>
+      <select name="sortfilms"> 
+          <% if (sortIndex < 2) { %>
+            <option label="Title" name="Title" selected value="Title"></option>
+            <option label = "Year" name="Year"  value="Year"></option>
+            <%} else { %>
+              <option label="Title" name="Title"  value="Title"></option>
+              <option label = "Year" name="Release" selected value="Year"></option>
+            <% } %>        
+        </select>
+  </div>
+   <div class="form-item">
+    <label>&nbsp;</label>
+    <select name="sortdirfilms">   
+      <% if (sortIndex == 1 || sortIndex == 3) { %>
+        <option label="up" name="Direction"  value="up">
+        <option label = "down" name="Direction" selected value="down">
+        <%} else { %>
+          <option label="up" name="Direction" selected value="up">
+          <option label = "down" name="Direction"   value="down">
+        <% } %>
+      </select>
+    
+   </div>
+  </div>
+
+   <div class="form-row">
+    <div class="form-item">
+    <div class="film-buttons">
+      
+    <div class="film-icon btn-sort">
+      <i class="fa-solid fa-compact-disc"></i>
+    </div>
+    <div class="film-icon btn-sort">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+  </div>
+  </div>
+  <div class="form-item">
+  </div>
+  </div>
+
+
+  <div class="form-row">
+    <button class="btn btn-primary" type="submit">Sort</button>
+  </div>
+  </div>
+  
+  </form>
+  <br>
+  <br>
+</div>
+
+
+
+<% films.forEach(film => { %>
+  <div class="film-row">
+  <a href="/films/<%= film._id %>">
+     <img class="book-cover book-cover-small" src="<%= film.Poster %>">
+    </a>
+    <div class="film-data">
+      
+
+      <div class="film-name">
+        <%= film.Title %> 
+        <div class="film-release">
+          (<%= film.Year %>)
+        </div> 
+       </div> 
+     
+      <div class="director-name">
+        <%= film.Director %> 
+      </div> 
+      <div class="genre-name">
+         <%= film.Genre %>
+      </div> 
+    </div>
+  </div>
+
+
+<% }) %>

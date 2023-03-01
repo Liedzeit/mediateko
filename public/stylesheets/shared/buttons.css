@@ -38,6 +38,13 @@
     color: var(--color-btn-primary-text);
     background-color: var(--color-btn-primary-background);
   }
+
+  .btn-primary-small {
+    color: var(--color-btn-primary-text);
+    background-color: var(--color-btn-primary-background);
+    font-size: 0.8rem;
+    margin-left:1rem;
+  }
   
   .btn-primary:hover {
     color: var(--color-btn-primary-text-dark);
@@ -52,4 +59,8 @@
   .btn-danger:hover {
     color: var(--color-btn-danger-text-dark);
     background-color: var(--color-btn-danger-background-dark);
+  }
+
+  .btn-sort:hover {
+    color: orange;
   }

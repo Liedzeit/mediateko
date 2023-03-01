@@ -1,14 +1,28 @@
 :root {
-  --form-label-font-size: 1.2rem;
+  --form-label-font-size: 0.8rem;
   --form-input-background-color: hsl(var(--color-base-hue), 100%, 31%);
   --form-input-border-color: hsl(var(--color-base-hue), 100%, 50%);
   --form-input-border-color-light: hsl(var(--color-base-hue), 100%, 80%);
+}
+
+.form-row-film {
+  width:300px;
+  margin-bottom: .5rem;
+}
+.form-item-film {
+  width:300px;
+  margin-left: 2rem;
+  flex-grow: 1;
+  flex-basis: 0;
+  border:2px;
+  border-color: greenyellow;
 }
 
 .form-row {
   display: flex;
   margin-bottom: .5rem;
 }
+
 
 .form-item {
   display: flex;
@@ -17,6 +31,8 @@
   flex-grow: 1;
   flex-basis: 0;
 }
+
+
 
 .form-item:first-child {
   margin-left: 0;
@@ -36,6 +52,12 @@
   margin-left: .25rem;
 }
 
+.form-item-film > label {
+  font-size: var(--form-label-font-size);
+  margin-bottom: .25rem;
+  margin-left: .25rem;
+}
+
 .form-item input, .form-item select, .form-item textarea {
   height: 2rem;
   padding: .25rem .5rem;
@@ -50,8 +72,8 @@
 }
 
 .form-item textarea {
-  height: 100%;
-  resize: none;
+  
+  font-size: 0.8rem;
 }
 
 .form-item select option {
@@ -76,3 +98,9 @@
   color: var(--color-text-light);
   font-size: inherit;
 }
+
+#sortFilms {
+  margin-left: 1rem;
+}
+
+

@@ -6,6 +6,7 @@
 @import 'shared/author.css';
 @import 'shared/books.css';
 @import 'shared/stars.css';
+@import 'shared/film.css';
 
 :root {
   font-family: 'Gotham Rounded';
@@ -19,6 +20,14 @@
 
 body {
   background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+}
+
+a{
+  color:rgb(189,233,255);
+}
+
+a:hover {
+  color: antiquewhite;
 }
 
 .container {
@@ -43,3 +52,4 @@ body {
 .invisible {
   display: none;
 }
+

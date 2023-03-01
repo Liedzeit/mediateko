@@ -1,6 +1,7 @@
 :root {
   --book-cover-width: 150px;
   --book-cover-width-large: 100px;
+  --book-cover-width-small: 50px;
   --book-cover-aspect-ratio: 0.68;
 }
 
@@ -9,8 +10,14 @@
   height: calc(var(--book-cover-width) / var(--book-cover-aspect-ratio));
 }
 
+
+
 .book-cover-large {
   --book-cover-width: var(--book-cover-width-large);
+}
+
+.book-cover-small {
+  --book-cover-width: var(--book-cover-width-small);
 }
 
 .book-grid {
@@ -101,4 +108,8 @@ color:orange !important;
 span.active a:after,
 .stars a.active:after{
 color:orange;
+}
+
+.hidden{
+display: none;
 }

@@ -27,7 +27,15 @@ function ready() {
   
   FilePond.parse(document.body)
   console.log(FilePond.Status)
+
+
+
 }
+
+
+
+
+
 
 
 
@@ -106,6 +114,7 @@ function showImage(responseAsBlob) {
 }
 
 function fetchImage(pathToResource) {
+  console.log("fetch image")
   fetch(pathToResource,{mode: 'no-cors'})
   .then(validateResponse)
   .then(readResponseAsBlob)

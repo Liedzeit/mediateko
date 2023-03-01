@@ -3,10 +3,12 @@
 .rate {
     display: inline-block;
     border: 0;
+    margin-top: -27px;
 }
 /* Hide radio */
 .rate > input {
     display: none;
+   
 }
 /* Order correctly by floating highest to the right */
 .rate > label {
@@ -15,11 +17,11 @@
 /* The star of the show */
 .rate > label:before {
     display: inline-block;
-    font-size: 1.3rem;
-    padding: .3rem .2rem;
-    margin: 0;
+    font-size: 1rem;
+    padding: 1.6rem .1rem;
     cursor: pointer;
     font-family: FontAwesome;
+    line-height: 10px;
     content: "\f005 "; /* full star */
 }
 
@@ -27,15 +29,16 @@
 .rate .half:before {
     content: "\f089 "; /* half star no outline */
     position: absolute;
+    margin-top: -0rem;
     padding-right: 0;
 }
 /* Click + hover color */
 input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: Orange;  } /* color previous stars on hover */
+label:hover, label:hover ~ label { color: orange;  } /* color previous stars on hover */
 
 
 /* Hover highlights */
 input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
 input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color:Orange;  } 
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color:orange;  } 
 

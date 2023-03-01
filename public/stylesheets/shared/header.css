@@ -12,11 +12,13 @@
 }
 
 .header-nav {
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5rem;
+  background:linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
 }
 
 .header-nav ul {
@@ -38,4 +40,15 @@
 
 .header-nav li a:hover, .header-title:hover {
   color: white;
+}
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
 }

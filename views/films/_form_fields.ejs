@@ -1,0 +1,64 @@
+<fieldset class="rate">
+  <input type="radio" class="starrate" id="rating10" <%- film.myRating=='10' ? 'checked' : '' %> name="rating" value="10" />
+  <label for="rating10" title="5 stars"></label>
+  <input type="radio" class="starrate" id="rating9" <%- film.myRating=='9' ? 'checked' : '' %> name="rating" value="9" />
+  <label class="half" for="rating9" title="4 1/2 stars"></label>
+  <input type="radio" class="starrate" id="rating8" <%- film.myRating=='8' ? 'checked' : '' %> name="rating" value="8" />
+  <label for="rating8" title="4 stars"></label>
+  <input type="radio" class="starrate" id="rating7" <%- film.myRating=='7' ? 'checked' : '' %> name="rating" value="7" />
+  <label class="half" for="rating7" title="3 1/2 stars"></label>
+  <input type="radio" class="starrate" id="rating6" <%- film.myRating=='6' ? 'checked' : '' %> name="rating" value="6" />
+  <label for="rating6" title="3 stars"></label>
+  <input type="radio" class="starrate" id="rating5" <%- film.myRating=='5' ? 'checked' : '' %> name="rating" value="5" />
+  <label class="half" for="rating5" title="2 1/2 stars"></label>
+  <input type="radio" class="starrate" id="rating4" <%- film.myRating=='4' ? 'checked' : '' %> name="rating" value="4" />
+  <label for="rating4" title="2 stars"></label>
+  <input type="radio" class="starrate" id="rating3" <%- film.myRating=='3' ? 'checked' : '' %> name="rating" value="3" />
+  <label class="half" for="rating3" title="1 1/2 stars"></label>
+  <input type="radio" class="starrate" id="rating2" <%- film.myRating=='2' ? 'checked' : '' %> name="rating" value="2" />
+  <label for="rating2" title="1 star"></label>
+  <input type="radio" class="starrate" id="rating1" <%- film.myRating=='1' ? 'checked' : '' %> name="rating" value="1" />
+  <label class="half" for="rating1" title="1/2 star"></label>
+</fieldset>
+<div class="form-row">
+  <div class="form-item">
+    <label>Title</label>
+    <input type="text" name="title" value="<%= film.Title %>">
+  </div>
+  <div class="form-item">
+    <label>Genre</label>
+    <input type="text" name="genre" value="<%= film.Genre %>">
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-item">
+    <label>Director</label>
+    <input type="text" name="director" value="<%= film.Director %>">
+  </div>
+  <div class="form-item">
+    <label>Actors</label>
+    <input type="text" name="actors" value="<%= film.Actors %>">
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-item">
+    <label>Medium</label>
+    <input type="text" name="medium" value="<%= film.Medium %>">
+  </div>
+  <div class="form-item">
+    <label>Watched</label>
+    <input type="date" name="watchDate" value="<%= film.WatchDate == null ? '' : film.WatchDate.toISOString().split('T')[0] %>">
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-item">
+    <label>Plot</label>
+    <textarea class="film-plot" name="plot"><%= film.Plot %>
+		</textarea>
+  </div>
+  <div class="form-item">
+    <label>Review</label>
+    <textarea class="film-plot" name="myReview"><%= film.myReview %>
+		</textarea>
+  </div>
+</div>

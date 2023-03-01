@@ -1,0 +1,95 @@
+.film-header {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 0rem;
+    margin-left: 1rem;
+    font-size: 2rem;
+  }
+
+  .filmsearch-header {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    font-size: 1rem;
+  }
+
+
+  .film-buttons {
+    display: flex;
+    justify-content: right;
+    margin-top: 0.6rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    
+  }
+  .film-icon {
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+  .film-row {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    border:1px;
+    border-color: aqua;
+  }
+  .film-data {
+    margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  }
+  .film-name {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.1rem;
+  }
+  .director-name {
+    font-size: 0.8rem;
+  }
+  .genre-name {
+    font-size: 0.6rem;
+    line-height: 1.5;
+  }
+  .film-release {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    margin-top: 0.1rem;
+  }
+
+  .show-film {
+    margin-left: 1rem;
+  }
+
+  .film-details {
+    display: flex;
+   
+  }
+
+  .film-details-label {
+    font-size: 0.8rem;
+    font-weight: 200;
+    align-self: flex-start;
+  }
+  
+  .film-details-grid {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    display: grid;
+    align-content: flex-start;
+    align-items: center;
+    grid-gap: 0.8rem;
+    grid-template-columns: auto auto;
+  }
+
+  .film-cover {
+    width: 8;
+    height: 10;
+  }
+
+  .film-plot{
+    height: 180px !important;    
+  }

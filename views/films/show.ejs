@@ -1,0 +1,89 @@
+
+   
+  <div class="show-film">
+   
+  <div class="film-header"> <%= film.Title %>
+ <div>
+  <fieldset class="rate">
+    <input type="radio" class="starrate" id="rating10" <%- film.myRating=='10' ? 'checked' : '' %> name="rating" value="10" /><label for="rating10" title="5 stars"></label>
+    <input type="radio" class="starrate" id="rating9"  <%- film.myRating=='9' ? 'checked' : '' %>  name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
+      <input type="radio" class="starrate" id="rating8"  <%- film.myRating=='8' ? 'checked' : '' %>  name="rating" value="8" /><label for="rating8" title="4 stars"></label>
+      <input type="radio" class="starrate" id="rating7"  <%- film.myRating=='7' ? 'checked' : '' %> name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
+      <input type="radio" class="starrate" id="rating6"   <%- film.myRating=='6' ? 'checked' : '' %> name="rating" value="6" /><label for="rating6" title="3 stars"></label>
+      <input type="radio" class="starrate" id="rating5"  <%- film.myRating=='5' ? 'checked' : '' %> name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
+      <input type="radio" class="starrate" id="rating4"  <%- film.myRating=='4' ? 'checked' : '' %> name="rating" value="4" /><label for="rating4" title="2 stars"></label>
+      <input type="radio" class="starrate" id="rating3"   <%- film.myRating=='3' ? 'checked' : '' %> name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
+      <input type="radio" class="starrate" id="rating2"   <%- film.myRating=='2' ? 'checked' : '' %>  name="rating" value="2" /><label for="rating2" title="1 star"></label>
+      <input type="radio" class="starrate" id="rating1"  <%- film.myRating=='1' ? 'checked' : '' %> name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
+  
+  </fieldset>
+
+
+
+
+</div>
+
+<div class="film-buttons">
+  <div >
+    <a  href="/films/<%= film.id %>/edit"><i class="fa-solid fa-pen-to-square"></i></a>
+  </div>
+  <div onclick="nextFilm()" class="film-icon">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+  
+</div>
+
+<form method="POST" action="/films/<%= film.id %>?_method=DELETE">
+  <button class="film-buttons" style="background-color:transparent; border-color:transparent; color:whitesmoke" type="submit"><i class="fa-solid fa-eraser"></i></button>
+</form>
+
+
+</div>
+
+
+
+
+  <div class="film-details">
+    
+      <div>
+        <img class="book-cover" width = "120" height = "170" src="<%= film.Poster%>">
+ 
+   
+      <div class="film-details-grid">
+        <div class="film-details-label">#:</div>
+        <div><%= film.num %></div>
+        <div class="film-details-label">Director:</div>
+        <div><%= film.Director %></div>
+        <div class="film-details-label">Year:</div>
+        <div><%= film.Year %></div>
+        <div class="film-details-label">Genre:</div>
+        <div><%= film.Genre %></div>
+        <div class="film-details-label">Actors:</div>
+        <div><%= film.Actors %></div>
+
+        <div class="film-details-label">Writer:</div>
+        <div><%= film.Writer %></div>
+        <div class="film-details-label">Runtime:</div>
+        <div><%= film.Runtime %></div>
+        <div class="film-details-label">Plot:</div>
+        <div><%= film.Plot %></div>
+        <div class="film-details-label">IMDb:</div>
+        <div><%= film.imdbRating %></div>
+
+
+        <div class="film-details-label"><a  href="https://www.imdb.com/title/<%= film.imdbID %>/" target="_blank">imdbId</a></div>
+
+        <div><%= film.imdbID %></div>
+        <div class="film-details-label">BoxOffice:</div>
+        <div><%= film.BoxOffice %></div>
+        <div class="film-details-label">Medium:</div>
+        <div><%= film.Medium %></div>
+        <div class="film-details-label">Watched:</div>
+        <div><%= film.WatchDate == null ? '' : film.WatchDate.toISOString().split('T')[0] %></div>
+      </div>
+      
+    </div>
+    </div>
+  </div>
+  
+    

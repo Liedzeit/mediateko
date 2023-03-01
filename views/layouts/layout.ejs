@@ -11,15 +11,15 @@
   <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
   <!--<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-  
+  <script src="https://kit.fontawesome.com/6906e40c7c.js" crossorigin="anonymous"></script>
   <script defer src="/javascripts/fileUpload.js"></script>
   <script defer src="/javascripts/import.js"></script>
   <script defer src="/javascripts/modal.js"></script>
+  <script defer src="/javascripts/helper.js"></script>
   
 
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link id="main-css" rel="stylesheet" href="/stylesheets/main.css"/>
 <link rel="stylesheet" href="/stylesheets/modal.css">
@@ -36,7 +36,7 @@
 <body>
   <div class="container">
       <%- include('../partials/header.ejs') %>
-      <div class="inner-container"></div>
+      <div id="content" class="inner-container"></div>
       <%- include('../partials/errorMessage.ejs') %>
       <%- include('../partials/myMessage.ejs') %>
       
