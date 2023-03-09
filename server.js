@@ -23,12 +23,17 @@ app.use(bodyParser.json());
 
 const { localsName } = require('ejs')
 
+
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true, useUnifiedTopology: true})
+url = "mongodb+srv://user:erwin@cluster0.qougs.mongodb.net/mediateko?retryWrites=true&w=majority"
 
-    console.log("trying to connect to mongoose")
+//mongoose.connect(process.env.DATABASE_URL
+mongoose.connect(url
+    , {
+    
+useNewUrlParser: true, useUnifiedTopology: true})
+console.log("trying to connect to mongoose")
 const db = mongoose.connection
 db.on('error', error => console.log("mongo Connect error: " + error))
 db.once('open', () => console.log('Connected to Mongoose'))
@@ -37,6 +42,14 @@ app.use('/', indexRouter)
 app.use('/authors', authorRouter)
 app.use('/books', bookRouter)
 app.use('/films', filmRouter)
+
+
+
+
+
+
+
+
 
 
 app.listen(process.env.PORT || 3000)

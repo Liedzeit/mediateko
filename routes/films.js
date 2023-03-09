@@ -14,7 +14,7 @@ try{
   let sortOptions = [{Title:1},{Title:-1},{Year:1},{Year:-1}]
   let sort, dir
   let sortIndex = 0
-  console.log("received request: sortindex: " + sortIndex)
+  console.log("received films request: sortindex: " + sortIndex)
   if (req.query.sortfilms != null && req.query.sortfilms !== '') {
     sort = req.query.sortfilms
     dir = req.query.sortdirfilms
@@ -37,7 +37,12 @@ try{
     console.log("SORTINDEX: " +sortIndex)
   }
   //searchOptions.Medium="DVD"
+
   const films = await Film.find(searchOptions).sort(sortOptions[sortIndex])
+
+  //const films = await Film.find()
+
+ 
     res.render('films/index', {
       films: films,
       sortIndex: sortIndex,
