@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 
 const { localsName } = require('ejs')
 
-
 const mongoose = require('mongoose')
 
 url = "mongodb+srv://user:erwin@cluster0.qougs.mongodb.net/mediateko?retryWrites=true&w=majority"
