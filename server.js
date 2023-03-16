@@ -24,8 +24,15 @@ app.use(bodyParser.json());
 const { localsName } = require('ejs')
 
 const mongoose = require('mongoose')
+const pw = process.env.MONGO_PW
 
-url = "mongodb+srv://user:erwin@cluster0.qougs.mongodb.net/mediateko?retryWrites=true&w=majority"
+const env = process.env.NODE_ENV || 'development';
+console.log ("ENV:" + env)
+let url = `mongodb+srv://user:${pw}@cluster0.qougs.mongodb.net/mediateko?retryWrites=true&w=majority`
+
+if (env == 'development'){
+    url = process.env.DATABASE_URL
+}
 
 //mongoose.connect(process.env.DATABASE_URL
 mongoose.connect(url

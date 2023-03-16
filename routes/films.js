@@ -137,10 +137,10 @@ router.get('/new', async (req, res) => {
   }
   else{
     console.log ("searching for title " + title)
+    const OMDAPI = process.env.OMDAPI
     if (title != ''){
-      console.log(`https://www.omdbapi.com/?t=${title}&apikey=fc7bd51`)
       try{
-      let resp = await fetch(`https://www.omdbapi.com/?t=${title}&apikey=fc7bd51`)
+      let resp = await fetch(`https://www.omdbapi.com/?t=${title}&apikey=${OMDAPI}`)
       let json = await resp.json()
       console.log("json " + JSON.stringify(json))
       if (json.Response == "False"){
