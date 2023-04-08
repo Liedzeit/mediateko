@@ -93,3 +93,19 @@
   .film-plot{
     height: 180px !important;    
   }
+
+  .deletebtn{
+    border-color:transparent;
+    background-color:transparent; 
+    color:rgb(224, 138, 138);
+    cursor:pointer;
+  }
+
+  .deletebtn:hover{
+    border-color:transparent;
+    background-color:transparent; 
+    color:red
+  }
+
+
+ 

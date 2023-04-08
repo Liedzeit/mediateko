@@ -12,6 +12,12 @@
     <div onclick="toggleFilmSort()" class="film-icon">
       <i class="fa-solid fa-sort"></i>
   </div>
+  <div onclick="showtop100()" class="film-icon">
+    <a  href="/films/top100"><i class="fa-solid fa-thumbs-up"></i></a>
+   
+</div>
+
+  
    
 
   </div>
@@ -120,15 +126,15 @@
 </div>
 
 
-
+<% var num = 0; %>
 <% films.forEach(film => { %>
+  <% num = num + 1; %>
   <div class="film-row">
   <a href="/films/<%= film._id %>">
      <img class="book-cover book-cover-small" src="<%= film.Poster %>">
     </a>
     <div class="film-data">
       
-
       <div class="film-name">
         <%= film.Title %> 
         <div class="film-release">
@@ -142,6 +148,9 @@
       <div class="genre-name">
          <%= film.Genre %>
       </div> 
+      <div class="genre-name">
+        <%= film.Medium %> - <%= film.Num %>
+     </div> 
     </div>
   </div>
 

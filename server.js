@@ -27,7 +27,7 @@ const mongoose = require('mongoose')
 const pw = process.env.MONGO_PW
 
 const env = process.env.NODE_ENV || 'development';
-console.log ("ENV:" + env)
+
 let url = `mongodb+srv://user:${pw}@cluster0.qougs.mongodb.net/mediateko?retryWrites=true&w=majority`
 
 if (env == 'development'){
@@ -39,7 +39,6 @@ mongoose.connect(url
     , {
     
 useNewUrlParser: true, useUnifiedTopology: true})
-console.log("trying to connect to mongoose")
 const db = mongoose.connection
 db.on('error', error => console.log("mongo Connect error: " + error))
 db.once('open', () => console.log('Connected to Mongoose'))
@@ -59,4 +58,3 @@ app.use('/films', filmRouter)
 
 
 app.listen(process.env.PORT || 3000)
-

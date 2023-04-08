@@ -5,6 +5,10 @@ const filmSchema = new mongoose.Schema({
         type: String, 
         required: false
     },
+    Num: { 
+        type: Number, 
+        required: false
+    },
     Title: { 
         type: String, 
         required: true
@@ -85,6 +89,10 @@ const filmSchema = new mongoose.Schema({
     },
     WatchDate: {
         type: Date,
+        required: false
+    },
+    Top100: {
+        type: Number,
         required: false
     },
 

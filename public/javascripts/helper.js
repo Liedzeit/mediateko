@@ -33,3 +33,7 @@ function toggleFilmSort(){
       searchdiv.classList.add("hidden");
   }
 }
+
+function showTop100(){
+  window.location="http://localhost:3000/films/top100"
+}

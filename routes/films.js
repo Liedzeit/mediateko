@@ -3,9 +3,9 @@ const router = express.Router()
 const fetch = require('node-fetch')
 const Film = require('../models/film')
 
-const genres=["--","Science Fiction","Superhero","Western","Film-Noir","Comedy","Drama","Action","Horror","War","Bond","Wallace","Oscar","Silent"]
+const genres=["--","Science Fiction","Superhero","Western","Film-Noir","Mystery","Comedy","Drama","Action","Horror","War","Bond","Wallace","Holmes","Oscar","Silent"]
    
-
+let startnum = 2047
 
 // All Films Route
 router.get('/', async (req, res) => {
@@ -38,9 +38,11 @@ try{
   }
   //searchOptions.Medium="DVD"
 
-  const films = await Film.find(searchOptions).sort(sortOptions[sortIndex])
+  //const films = await Film.find(searchOptions).sort(sortOptions[sortIndex])
+  const films = await Film.find(searchOptions).sort({'Num':1})
+  //const films = await Film.find({'num':{$gt:'3000'}}).sort({'num':1})
 
-  //const films = await Film.find()
+
 
  
     res.render('films/index', {
@@ -49,13 +51,41 @@ try{
       genres:genres,
       searchOptions: req.query
     })
-  } catch {
-    console.log("ERROR")
+  } catch(e) {
+    console.log("ERROR: " + e)
     res.redirect('/')
   }
   //console.log("sortOptions name: " + sortOptions.sortfilms)
 
 })
+
+
+router.get('/top100', async (req, res) => {
+  try{
+    let searchOptions = {"Top100":{$gt: '0'}}
+    let sortOptions = {Top100:1}
+    
+  
+    const films = await Film.find(searchOptions).sort(sortOptions)
+  
+  
+  
+   
+      res.render('films/index', {
+        films: films,
+        sortIndex: 0,
+        genres:genres,
+        searchOptions: req.query
+      })
+    } catch(e) {
+      console.log("ERROR: " + e)
+      res.redirect('/')
+    }
+    //console.log("sortOptions name: " + sortOptions.sortfilms)
+  
+  })
+
+
 
 router.get('/search', async (req, res) => {
   try {
@@ -111,6 +141,7 @@ router.get('/new', async (req, res) => {
       res.render('films/new', { })
       return
     }
+    startnum = startnum + 1
   let mid = req.query.imdbid
   let title = req.query.title
   if (mid != undefined && mid != ''){
@@ -121,13 +152,14 @@ router.get('/new', async (req, res) => {
     let json = await resp.json()
     console.log(json)
     console.log(json.Title)
-    json.WatchDate = new Date()
+    //json.WatchDate = new Date()
 
     const film = new Film(json)
+    film.Medium = "DVD"
+    film.Num = startnum
 
     try {
       const newFilm = await film.save()
-      console.log("NEW Id: " + newFilm.id)
       res.redirect(`/films/${newFilm._id}`)
       }
       catch (er) {
@@ -142,15 +174,17 @@ router.get('/new', async (req, res) => {
       try{
       let resp = await fetch(`https://www.omdbapi.com/?t=${title}&apikey=${OMDAPI}`)
       let json = await resp.json()
-      console.log("json " + JSON.stringify(json))
+    
       if (json.Response == "False"){
         console.log("not found")
       }
       else{
-        json.WatchDate = new Date()
+        //json.WatchDate = new Date()
 
         const film = new Film(json)
-
+        film.Medium = "DVD"
+        film.Num = startnum
+        
         try {
           const newFilm = await film.save()
           console.log("NEW Id: " + newFilm.id)
@@ -167,10 +201,7 @@ router.get('/new', async (req, res) => {
         console.log("Error")
         res.render('films/new', { })
       }
-      
-      
-      
-      
+
     }
     
   }
@@ -209,8 +240,8 @@ router.put('/:id', async (req, res) => {
   console.log("actors: " + req.body.actors)
   console.log("rating: " + req.body.rating)
   console.log("Title: " + req.body.title)
-  console.log("Genre: " + req.body.genre)
-  console.log("ID: " + req.params.id)
+  console.log("new: " + req.body.new)
+  console.log("Top100: " + req.body.top100)
  
   let film
   try {
@@ -222,6 +253,9 @@ router.put('/:id', async (req, res) => {
     film.myReview = req.body.myReview
     film.myRating = req.body.rating
     film.Genre = req.body.genre
+    film.Top100 = req.body.top100
+    film.num = req.body.num
+    film.Num = req.body.Num
     console.log("WD: " + req.body.watchDate)
     if (req.body.watchDate != null && req.body.watchDate.length>0 ){
        try{
@@ -252,8 +286,22 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  console.log("DELETE FILM" + req.params.id)
-  
+  console.log("DELETE FILM: " + req.params.id)
+  let film
+  try {
+    film = await Film.findById(req.params.id)
+    await film.remove()
+    res.redirect('/films')
+  } catch {
+    if (book != null) {
+      res.render('films/show', {
+        film: film,
+        errorMessage: 'Could not remove film'
+      })
+    } else {
+      res.redirect('/')
+    }
+  }
 })
 
 

@@ -34,7 +34,7 @@
 </div>
 
 <form method="POST" action="/films/<%= film.id %>?_method=DELETE">
-  <button class="film-buttons" style="background-color:transparent; border-color:transparent; color:whitesmoke" type="submit"><i class="fa-solid fa-eraser"></i></button>
+  <button class="film-buttons deletebtn"  type="submit"><i class="fa-solid fa-eraser"></i></button>
 </form>
 
 
@@ -51,11 +51,13 @@
    
       <div class="film-details-grid">
         <div class="film-details-label">#:</div>
-        <div><%= film.num %></div>
+        <div><%= film.Num %></div>
         <div class="film-details-label">Director:</div>
         <div><%= film.Director %></div>
         <div class="film-details-label">Year:</div>
         <div><%= film.Year %></div>
+        <div class="film-details-label">Country:</div>
+        <div><%= String(film.Country).replace('United States','US').replace('United Kingdom','UK') %></div>
         <div class="film-details-label">Genre:</div>
         <div><%= film.Genre %></div>
         <div class="film-details-label">Actors:</div>
@@ -80,7 +82,9 @@
         <div><%= film.Medium %></div>
         <div class="film-details-label">Watched:</div>
         <div><%= film.WatchDate == null ? '' : film.WatchDate.toISOString().split('T')[0] %></div>
-      </div>
+        <div class="film-details-label">Top100:</div>
+        <div><%= film.Top100 %></div>
+   </div>
       
     </div>
     </div>
