@@ -1,0 +1,29 @@
+  <% music.forEach(music => { %>
+  <% num = num + 1; %>
+  <div class="film-row">
+  <a href="/music/<%= music._id %>">
+     <img class="book-cover book-cover-small" src="<%= music.Poster %>">
+    </a>
+    <div class="film-data">
+      
+      <div class="film-name">
+        <%= music.Title %> 
+        <div class="film-release">
+          (<%= music.Year %>)
+        </div> 
+       </div> 
+     
+      <div class="director-name">
+        <%= music.Artist %> 
+      </div> 
+      <div class="genre-name">
+         <%= music.Genre %>
+      </div> 
+      <div class="genre-name">
+        <%= music.Medium %> - <%= music.Num %> -  - <%= film.Top100%>
+     </div> 
+    </div>
+  </div>
+
+
+<% }) %>

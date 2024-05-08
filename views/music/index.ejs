@@ -1,19 +1,16 @@
 <div id="film-header" class="film-header">
-  Films
   <div class="film-buttons">
-    <div onclick="toggleFilmSearch()" class="film-icon">
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </div>
+   
     <div class="film-icon">
 
-      <a  href="/films/new"><i class="fa-solid fa-plus"></i></a>
+      <a  href="/music/new"><i class="fa-solid fa-plus"></i></a>
 
     </div>
-    <div onclick="toggleFilmSort()" class="film-icon">
+    <div onclick="toggleMusicSort()" class="film-icon">
       <i class="fa-solid fa-sort"></i>
   </div>
-  <div onclick="showtop100()" class="film-icon">
-    <a  href="/films/top100"><i class="fa-solid fa-thumbs-up"></i></a>
+  <div onclick="showtop100Music()" class="film-icon">
+    <a  href="/music/top100"><i class="fa-solid fa-thumbs-up"></i></a>
    
 </div>
 
@@ -25,14 +22,14 @@
  
 <div id="searchFilms" class="hidden">
   <h2  class="page-header">Search Films</h2>
-<form action="/films/search" method="GET">
+<form action="/music/search" method="GET">
   <div class="form-row">
     <div class="form-item">
       <label>Title</label>
       <input type="text" name="Title" value="<%= searchOptions.Title %>">
     </div>
     <div class="form-item">
-      <label>Director</label>
+      <label>Artist</label>
       <input type="text" name="Director" value="<%= searchOptions.Director %>">
     </div>
   </div>
@@ -68,7 +65,7 @@
 
 <div id="sortFilms" class="hidden">
   
-  <form action="/films" method="GET">
+  <form action="/music" method="GET">
     
     <div class="form-row">
     <div class="form-item">
@@ -130,32 +127,5 @@
 
 
 <% var num = 0; %>
-<% films.forEach(film => { %>
-  <% num = num + 1; %>
-  <div class="film-row">
-  <a href="/films/<%= film._id %>">
-     <img class="book-cover book-cover-small" src="<%= film.Poster %>">
-    </a>
-    <div class="film-data">
-      
-      <div class="film-name">
-        <%= film.Title %> 
-        <div class="film-release">
-          (<%= film.Year %>)
-        </div> 
-       </div> 
-     
-      <div class="director-name">
-        <%= film.Director %> 
-      </div> 
-      <div class="genre-name">
-         <%= film.Genre %>
-      </div> 
-      <div class="genre-name">
-        <%= film.Medium %> - <%= film.Num %> - <%= film.imdbRating%> - <%= film.Top100%>
-     </div> 
-    </div>
-  </div>
 
 
-<% }) %>

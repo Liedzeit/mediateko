@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
-const filmSchema = new mongoose.Schema({
-    num: { 
-        type: String, 
-        required: false
-    },
+const musicSchema = new mongoose.Schema({
     Num: { 
         type: Number, 
         required: false
@@ -23,24 +19,12 @@ const filmSchema = new mongoose.Schema({
     Released: { 
         type: String
     },
-    Runtime: { 
-        type: String,
-        required: false
-    },
     Genre: {
         type: String,
         required: true
     },
-    Director: { 
+    Musician: { 
         type: String,
-        required: true
-    },
-    Writer: { 
-        type: String,
-        required: false
-    },
-    Actors: { 
-        type: String, 
         required: true
     },
     Plot: { 
@@ -79,10 +63,6 @@ const filmSchema = new mongoose.Schema({
         type: String, 
         required: false
     },
-   BoxOffice: { 
-    type: String, 
-    required: false
-    },
     Medium: { 
         type: String, 
         required: false
@@ -95,10 +75,6 @@ const filmSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
-    Cinema: {
-        type: Boolean,
-        required: false
-    },
 
 
 })
@@ -109,4 +85,4 @@ const filmSchema = new mongoose.Schema({
     }
   })*/
 
-module.exports = mongoose.model('Film', filmSchema)
+module.exports = mongoose.model('Music', musicSchema)

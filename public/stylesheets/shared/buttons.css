@@ -64,3 +64,10 @@
   .btn-sort:hover {
     color: orange;
   }
+
+
+
+  .btn-sort:focus {     
+    background-color: red;
+    color:rgb(117, 64, 201);    
+}

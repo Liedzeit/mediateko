@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const fetch = require('node-fetch')
-const Film = require('../models/film')
+const Film = require('../models/music')
 
-const genres=["--","Science Fiction","Superhero","Western","Film-Noir","Mystery","Comedy","Drama","Action","Horror","War","Bond","Wallace","Holmes","Oscar","Silent"]
+const genres=["--","Pop","Rock","Western","Film-Noir","Mystery","Comedy","Drama","Action","Horror","War","Bond","Wallace","Holmes","Oscar","Silent"]
 const options = [ "Title", "Year", "imdbRating", "myRating","Num"];
 
 let startnum = 2047
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   let sort, dir
   let sortIndex = 0
   let sortObj={}
-  console.log("received films request..." +req.query.sortfilms)
+  console.log("received music request..." +req.query.sortfilms)
   if (req.query.sortfilms != null && req.query.sortfilms !== '') {
     sort = req.query.sortfilms
     if (sort == "Index"){
@@ -43,6 +43,7 @@ router.get('/', async (req, res) => {
 
   //const films = await Film.find(searchOptions).sort(sortOptions[sortIndex])
   let films
+  let music
   if (sort=="myRating" || sort == "imdbRating"){
     films = await Film.find(searchOptions).sort(sortObj).collation({locale:"en_US", numericOrdering:true})
   }
@@ -56,8 +57,8 @@ router.get('/', async (req, res) => {
   //const films = await Film.find({'Num':{$lt:1020}}).sort({myRating:-1}).collation({locale:"en_US", numericOrdering:true})
   
 try{
-    res.render('films/index', {
-      films: films,
+    res.render('music/index', {
+      music: music,
       sortIndex: sortIndex,
       genres:genres,
       searchOptions: req.query
@@ -81,7 +82,7 @@ router.get('/top100', async (req, res) => {
     const films = await Film.find(searchOptions).sort(sortOptions)
   
    
-      res.render('films/index', {
+      res.render('music/index', {
         films: films,
         sortIndex: 0,
         genres:genres,
@@ -145,7 +146,7 @@ router.get('/new', async (req, res) => {
    console.log(req.query)
     if (Object.keys(req.query).length === 0){
     console.log("no request")
-      res.render('films/new', { })
+      res.render('music/new', { })
       return
     }
     startnum = startnum + 1
@@ -201,13 +202,13 @@ router.get('/new', async (req, res) => {
           catch (er) {
             console.log("error: " + er.message)
             curerrmsg = er.message
-            res.render('films/new', { })
+            res.render('music/new', { })
         } 
       }
       }
       catch(e){
         console.log("Error")
-        res.render('films/new', { })
+        res.render('music/new', { })
       }
 
     }
